@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,18 +56,17 @@
             animation: drift 25s infinite alternate-reverse ease-in-out;
         }
 
-        /* Visible Painted Stars */
+        /* Decorative Stars (Painted Style) */
         .star {
             position: absolute;
             fill: var(--brand-red);
-            opacity: 0.4; /* Bumping this up from 0.2 */
-            animation: twinkle 5s infinite ease-in-out;
-            z-index: 1; /* Move them slightly forward */
+            opacity: 0.2;
+            animation: twinkle 4s infinite ease-in-out;
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
-            50% { opacity: 0.6; transform: scale(1.1) rotate(15deg); }
+            0%, 100% { opacity: 0.1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.3; transform: scale(1.1) rotate(10deg); }
         }
 
         @keyframes drift {
@@ -86,8 +85,6 @@
             margin: 0 auto;
             background: rgba(252, 250, 250, 0.7);
             backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 2;
         }
 
         .sidebar {
@@ -219,12 +216,8 @@
 <div class="background-islands">
     <div class="island island-1"></div>
     <div class="island island-2"></div>
-    
-    <svg class="star" style="top: 15%; left: 10%; width: 50px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-    
-    <svg class="star" style="bottom: 20%; right: 5%; width: 80px; animation-delay: 2s;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-    
-    <svg class="star" style="top: 50%; left: 3%; width: 30px; animation-delay: 1s;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+    <svg class="star" style="top: 20%; left: 15%; width: 40px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+    <svg class="star" style="top: 70%; right: 10%; width: 60px; animation-delay: 2s;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
 </div>
 
 <div class="grid-container">
@@ -301,4 +294,4 @@
 </div>
 
 </body>
-</html>
+</html> -->
