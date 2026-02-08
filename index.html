@@ -7,26 +7,76 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.85em%22 x=%22-5%22 font-size=%2285%22>🍓</text></svg>">
     <style>
         :root {
-            --bg: #ffeee3;
-            --brand-red: #bb1f1f;
-            --line: rgba(187, 31, 31, 0.15);
+            /* Refined Palette: Whiter background, stronger brand colors */
+            --bg: #fcfafa; /* Very clean off-white */
+            --brand-red: #bb1f1f; /* Your strawberry red */
+            --brand-pink: #e84a5f; /* A softer accent pink */
+            --brand-purple: #8e44ad; /* Deep purple for gradients */
+            --brand-blue: #3498db; /* Accent blue for gradients */
+            --line: rgba(187, 31, 31, 0.1); /* Subtle grid lines */
             --text: #2d2d2d;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             background-color: var(--bg); 
-            font-family: 'Inter', sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Prevents scrollbar from blurred elements */
+            position: relative;
         }
+
+        /* --- BACKGROUND ISLANDS --- */
+        .background-islands {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; /* Puts them behind everything */
+            pointer-events: none;
+        }
+        
+        .island {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px); /* Extreme blur for the "island" effect */
+            opacity: 0.4; /* Subtle transparency */
+        }
+
+        /* Top Right Island: Pink blended with Purple */
+        .island-1 {
+            top: -25%;
+            right: -15%;
+            width: 700px; height: 700px;
+            background: linear-gradient(135deg, var(--brand-pink), var(--brand-purple));
+            animation: drift 20s infinite alternate ease-in-out;
+        }
+
+        /* Bottom Left Island: Blue blended with Brand Red */
+        .island-2 {
+            bottom: -30%;
+            left: -20%;
+            width: 800px; height: 800px;
+            background: linear-gradient(45deg, var(--brand-blue), var(--brand-red));
+            animation: drift 25s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 30px) rotate(5deg); }
+        }
+        /* --------------------------- */
+
 
         /* Layout Grid */
         .grid-container {
             display: grid;
             grid-template-columns: 80px 1fr;
             min-height: 100vh;
-            border: 1px solid var(--line);
+            border-left: 1px solid var(--line);
+            border-right: 1px solid var(--line);
+            max-width: 1440px;
+            margin: 0 auto;
+            background: rgba(252, 250, 250, 0.7); /* Slight glass effect over background */
+            backdrop-filter: blur(10px);
         }
 
         /* Sidebar Navigation */
@@ -37,7 +87,6 @@
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .social-link {
@@ -60,40 +109,57 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 25px 50px;
             border-bottom: 1px solid var(--line);
         }
 
-        .logo { font-weight: 900; font-size: 24px; color: var(--brand-red); letter-spacing: 2px; }
-        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .logo { font-weight: 900; font-size: 26px; color: var(--brand-red); letter-spacing: 1px; }
+        .menu a { text-decoration: none; color: var(--text); margin-left: 40px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .menu a:hover { color: var(--brand-red); }
 
         /* Hero Section */
         .hero {
-            padding: 80px 40px;
+            padding: 100px 50px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
             border-bottom: 1px solid var(--line);
+            overflow: hidden;
         }
 
-        .hero-text h1 { font-size: clamp(3rem, 8vw, 5rem); line-height: 1; margin-bottom: 20px; }
-        .hero-text p { font-size: 1.1rem; opacity: 0.7; max-width: 450px; line-height: 1.6; }
+        .hero-text h1 { font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 25px; letter-spacing: -2px;}
+        .hero-text p { font-size: 1.15rem; opacity: 0.8; max-width: 480px; line-height: 1.7; margin-bottom: 35px; }
+
+        .btn-main {
+            padding: 15px 40px;
+            background: var(--brand-red);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px -10px rgba(187, 31, 31, 0.5);
+            transition: 0.3s;
+        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(187, 31, 31, 0.7); }
 
         /* Floating Orb (The "Life" Animation) */
         .orb-container { position: relative; display: flex; justify-content: center; align-items: center; }
         .orb {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(45deg, var(--brand-red), #ff7e5f);
+            width: 350px; height: 350px;
+            /* Gradient that matches the brand pink/red */
+            background: linear-gradient(45deg, var(--brand-red), var(--brand-pink));
             border-radius: 50%;
-            filter: blur(1px);
-            box-shadow: 20px 20px 60px rgba(0,0,0,0.1);
-            animation: float 6s ease-in-out infinite;
+            filter: blur(30px); /* Less blur than islands, more defined */
+            opacity: 0.8;
+            box-shadow: 20px 20px 60px rgba(187, 31, 31, 0.2);
+            animation: float 7s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.05); }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(5deg) scale(1.02); }
         }
 
         /* Analytics Section */
@@ -101,28 +167,55 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             border-bottom: 1px solid var(--line);
+            background: rgba(255,255,255,0.5);
         }
-        .stat-box { padding: 40px; border-right: 1px solid var(--line); text-align: center; }
+        .stat-box { padding: 50px; border-right: 1px solid var(--line); text-align: left; }
         .stat-box:last-child { border-right: none; }
-        .stat-box h2 { font-size: 2.5rem; color: var(--brand-red); margin-bottom: 10px; }
+        .stat-box h2 { font-size: 3rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 900; }
+        .stat-box p { font-size: 1.1rem; font-weight: 500; opacity: 0.9; }
+
+        /* Founder Section */
+        .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+        .founder-section h3 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; color: var(--brand-red); opacity: 0.7; }
+        .founder-text { font-size: 2rem; max-width: 900px; line-height: 1.4; font-weight: 300; }
+        .highlight-title { font-weight: 800; color: var(--text); position: relative; display: inline-block; }
+        /* Subtly underline the new titles with brand color */
+        .highlight-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--brand-red); opacity: 0.3; }
 
         /* Footer */
-        footer { padding: 60px 40px; background: #fff; }
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .sub-box input { padding: 10px; border: 1px solid var(--line); background: var(--bg); width: 250px; }
-        .sub-box button { padding: 10px 20px; background: var(--brand-red); color: #fff; border: none; cursor: pointer; }
+        footer { padding: 80px 50px; background: var(--bg); }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        .footer-heading { margin-bottom: 25px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .sub-box { display: flex; }
+        .sub-box input { padding: 15px; border: 1px solid var(--line); background: transparent; width: 100%; font-family: inherit; outline: none; }
+        .sub-box button { padding: 15px 30px; background: var(--brand-red); color: #fff; border: none; cursor: pointer; font-weight: 700; transition: 0.3s; }
+        .sub-box button:hover { background: var(--text); }
 
         /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .grid-container { grid-template-columns: 1fr; border: none; }
             .sidebar { display: none; }
-            .hero { grid-template-columns: 1fr; }
+            nav { padding: 20px; }
+            .menu { display: none; } /* Hide menu on small screens for now */
+            .hero { grid-template-columns: 1fr; padding: 60px 20px; text-align: center; gap: 40px; }
+            .hero-text h1 { font-size: 3rem; }
+            .hero-text p { margin: 0 auto 30px auto; }
+            .orb { width: 250px; height: 250px; margin: 0 auto; }
             .stats { grid-template-columns: 1fr; }
-            .stat-box { border-right: none; border-bottom: 1px solid var(--line); }
+            .stat-box { border-right: none; border-bottom: 1px solid var(--line); padding: 30px 20px; text-align: center; }
+            .founder-section { padding: 60px 20px; }
+            .founder-text { font-size: 1.5rem; }
+            footer { padding: 40px 20px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
         }
     </style>
 </head>
 <body>
+
+<div class="background-islands">
+    <div class="island island-1"></div>
+    <div class="island island-2"></div>
+</div>
 
 <div class="grid-container">
     <aside class="sidebar">
@@ -143,14 +236,14 @@
 
         <section class="hero" id="about">
             <div class="hero-text">
-                <h1>Engineering <br>for the <br>Future. ✨</h1>
+                <h1>Correct strategies <br>for your <br>future. ✨</h1>
                 <p>We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.</p>
                 <br>
-                <a href="mailto:info@techberry.ge" style="text-decoration: underline; color: var(--brand-red); font-weight: bold;">Get Started</a>
+                <a href="mailto:info@techberry.ge" class="btn-main">Get Started</a>
             </div>
             <div class="orb-container">
                 <div class="orb"></div>
-                <div style="position: absolute; font-size: 100px;">🍓</div>
+                <div style="position: absolute; font-size: 100px; z-index: 2; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));">🍓</div>
             </div>
         </section>
 
@@ -169,10 +262,11 @@
             </div>
         </section>
 
-        <section id="founder" style="padding: 80px 40px; border-bottom: 1px solid var(--line);">
-            <h3 style="text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;">The Goldmine Expertise</h3>
-            <p style="font-size: 1.5rem; max-width: 700px; line-height: 1.4;">
-                Founded by a 25-year-old <strong>Senior Robotics Teacher</strong>. 
+        <section id="founder" class="founder-section">
+            <h3>The Goldmine Expertise</h3>
+            <p class="founder-text">
+                Founded by a 25-year-old 
+                <span class="highlight-title">Lead Engineer & Head of Teaching Staff</span>. 
                 With degrees in <strong>ECE Engineering, Computer Engineering, and DevOps</strong>, 
                 Techberry Academy bridges the gap between basic coding and professional engineering.
             </p>
@@ -181,14 +275,16 @@
         <footer>
             <div class="footer-grid">
                 <div>
-                    <h4 style="margin-bottom: 20px;">Contact</h4>
+                    <h4 class="footer-heading">Contact</h4>
                     <p>info@techberry.ge</p>
                     <p>Tbilisi, Georgia</p>
                 </div>
-                <div class="sub-box">
-                    <h4 style="margin-bottom: 20px;">Subscribe to our Lab Notes</h4>
-                    <input type="email" placeholder="Email Address">
-                    <button>Join</button>
+                <div>
+                    <h4 class="footer-heading">Subscribe to our Lab Notes</h4>
+                    <div class="sub-box">
+                        <input type="email" placeholder="Email Address">
+                        <button>Join</button>
+                    </div>
                 </div>
             </div>
         </footer>
