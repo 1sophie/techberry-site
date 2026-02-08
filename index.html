@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TECHBERRY | Engineering Academy</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23bb1f1f%22 d=%22M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z%22/></svg>">
+    
     <style>
         :root {
             --bg: #fcfafa;
             --brand-red: #bb1f1f;
-            --brand-pink: #e84a5f;
+            --brand-pink: #e84a5f; /* Your specific Pink */
             --brand-purple: #8e44ad;
             --brand-blue: #3498db;
             --line: rgba(187, 31, 31, 0.1);
             --text: #2d2d2d;
+            --font-header: 'Syncopate', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: var(--font-body); color: var(--text); }
 
         /* --- BACKGROUND ISLANDS --- */
         .background-islands { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
@@ -27,12 +34,10 @@
         .island-2 { bottom: -15%; left: -15%; width: 80vw; height: 80vw; background: radial-gradient(circle, var(--brand-blue), var(--brand-red)); animation: drift 30s infinite alternate-reverse ease-in-out; }
         @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(40px, 30px); } }
 
-        /* --- RESTORED STARS --- */
         .star-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .star { position: absolute; fill: var(--brand-red); opacity: 0.3; animation: twinkle 6s infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1) rotate(0deg); } 50% { opacity: 0.5; transform: scale(1.1) rotate(10deg); } }
 
-        /* Layout Grid */
         .grid-container {
             display: grid; grid-template-columns: 80px 1fr; min-height: 100vh; max-width: 1440px; margin: 0 auto; background: rgba(252, 250, 250, 0.6); backdrop-filter: blur(20px); position: relative; z-index: 2;
         }
@@ -42,55 +47,60 @@
 
         main { display: flex; flex-direction: column; width: 100%; }
 
+        /* --- HEADER LOGO --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; border-bottom: 1px solid var(--line); position: relative; z-index: 100; }
-        .logo { font-weight: 900; font-size: 24px; color: var(--brand-red); letter-spacing: 1px; }
+        .logo { 
+            font-family: var(--font-header); 
+            font-weight: 700; 
+            font-size: 22px; 
+            color: var(--brand-pink); /* Updated to Pink */
+            letter-spacing: 1px; 
+            text-transform: uppercase;
+        }
+        
         .menu { display: flex; }
-        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
         .burger { display: none; cursor: pointer; background: none; border: none; padding: 10px; z-index: 1001; }
         .burger div { width: 22px; height: 2px; background-color: var(--brand-red); margin: 6px 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
         .hero { padding: 80px 40px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; border-bottom: 1px solid var(--line); }
-        .hero-text h1 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
-        .hero-text p { font-size: 1.1rem; opacity: 0.8; max-width: 450px; line-height: 1.6; margin-bottom: 30px; }
-        .btn-main { padding: 14px 35px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; }
+        .hero-text h1 { font-family: var(--font-header); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; letter-spacing: -1px; }
+        .hero-text p { font-size: 1.1rem; opacity: 0.8; max-width: 450px; line-height: 1.7; margin-bottom: 35px; }
+        .btn-main { padding: 16px 40px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
 
         .orb-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 400px; }
         .orb { width: 350px; height: 350px; background: radial-gradient(circle, var(--brand-red), var(--brand-pink)); border-radius: 50%; filter: blur(40px); opacity: 0.8; animation: float 8s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
 
-        /* --- STRAWBERRY WRAPPER & ANIMATION --- */
-        /* The wrapper handles positioning */
-        .pixel-wrapper {
-            position: absolute;
-            z-index: 10;
-            top: 50%; left: 50%;
-            /* Desktop base position: centered, then lifted 20px */
-            transform: translate(-50%, -50%) translateY(-20px);
-        }
-        /* The image handles animation */
-        .pixel-art-anim {
-            width: 180px;
-            image-rendering: pixelated;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
-            animation: floatImg 7s ease-in-out infinite;
-        }
+        .pixel-wrapper { position: absolute; z-index: 10; top: 50%; left: 50%; transform: translate(-50%, -50%) translateY(-20px); }
+        .pixel-art-anim { width: 180px; image-rendering: pixelated; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2)); animation: floatImg 7s ease-in-out infinite; }
         @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
-
 
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
         .stat-box { padding: 50px; border-right: 1px solid var(--line); position: relative; }
         .stat-box:last-child { border-right: none; }
-        .stat-box h2 { font-size: 3rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 900; }
+        .stat-box h2 { font-family: var(--font-header); font-size: 2.5rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 700; }
 
         .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); }
         .founder-text { font-size: 2rem; max-width: 900px; line-height: 1.4; font-weight: 300; }
+        .highlight-title { font-weight: 800; border-bottom: 3px solid rgba(187, 31, 31, 0.2); }
 
+        /* --- FOOTER LOGO --- */
         footer { padding: 80px 40px; background: #fff; }
+        .footer-logo {
+            font-family: var(--font-header);
+            color: var(--brand-pink);
+            font-size: 14px; /* Little version */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .sub-box { display: flex; gap: 10px; margin-top: 15px; }
         .sub-box input { padding: 12px; border: 1px solid var(--line); background: transparent; flex: 1; font-family: inherit; }
-        .sub-box button { padding: 12px 25px; background: var(--brand-red); color: #fff; border: none; font-weight: 700; cursor: pointer; }
+        .sub-box button { padding: 12px 25px; background: var(--brand-red); color: #fff; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
         @media (max-width: 768px) {
             .grid-container { grid-template-columns: 1fr; width: 100%; border: none; }
@@ -99,21 +109,14 @@
             .burger { display: block; }
             .menu { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg); flex-direction: column; justify-content: center; align-items: center; transition: 0.5s; z-index: 1000; }
             .menu.active { right: 0; }
-            .menu a { margin: 25px 0; font-size: 20px; }
-
+            .menu a { margin: 25px 0; font-size: 18px; font-family: var(--font-header); }
             .hero { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; }
-            .hero-text h1 { font-size: 2.8rem; }
-            .orb { width: 280px; height: 280px; }
-            
-            /* Mobile Position update for wrapper */
             .pixel-wrapper { transform: translate(-50%, -50%) translateY(-30px); }
             .pixel-art-anim { width: 140px; }
-
             .stats { grid-template-columns: 1fr; padding: 40px 0; }
-            .stat-box { border-right: none; border-bottom: none; text-align: center; padding: 30px 20px; }
+            .stat-box { border-right: none; text-align: center; padding: 30px 20px; }
             .stat-box::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: var(--line); }
             .stat-box:last-child::after { display: none; }
-
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
             .sub-box { flex-direction: column; }
         }
@@ -176,19 +179,19 @@
                 Founded by a 25-year-old
                 <span class="highlight-title">Lead Engineer & Head of Teaching Staff</span>. 
                 With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, 
-                Techberry bridges the gap between basic coding and professional engineering.
+                Techberry Academy bridges the gap between basic coding and professional engineering.
             </p>
         </section>
 
         <footer>
             <div class="footer-grid">
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Contact</h4>
+                    <span class="footer-logo">TECHBERRY</span>
                     <p>info@techberry.ge</p>
                     <p>Tbilisi, Georgia</p>
                 </div>
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px;">Subscribe</h4>
+                    <h4 style="text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-header); font-size: 14px;">Subscribe</h4>
                     <p style="opacity: 0.6; font-size: 0.9rem; margin-top: 5px;">Join our community of young engineers.</p>
                     <div class="sub-box">
                         <input type="email" placeholder="Email Address">
