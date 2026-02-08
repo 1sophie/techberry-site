@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>TECHBERRY | Engineering Academy</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23bb1f1f%22 d=%22M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z%22/></svg>">
     <style>
@@ -17,198 +17,102 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
+        
+        html, body { 
+            width: 100%;
+            overflow-x: hidden; /* This is the primary kill-switch for sideways scrolling */
             background-color: var(--bg); 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             color: var(--text);
-            overflow-x: hidden;
             position: relative;
         }
 
         /* --- BACKGROUND ELEMENTS --- */
         .background-islands {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
         }
-        
-        .island {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(130px);
-            opacity: 0.35;
-        }
+        .island { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; }
+        .island-1 { top: -10%; right: -10%; width: 50vw; height: 50vw; background: linear-gradient(135deg, var(--brand-pink), var(--brand-purple)); animation: drift 20s infinite alternate ease-in-out; }
+        .island-2 { bottom: -10%; left: -10%; width: 60vw; height: 60vw; background: linear-gradient(45deg, var(--brand-blue), var(--brand-red)); animation: drift 25s infinite alternate-reverse ease-in-out; }
 
-        .island-1 {
-            top: -25%;
-            right: -15%;
-            width: 700px; height: 700px;
-            background: linear-gradient(135deg, var(--brand-pink), var(--brand-purple));
-            animation: drift 20s infinite alternate ease-in-out;
-        }
+        @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 20px); } }
 
-        .island-2 {
-            bottom: -30%;
-            left: -20%;
-            width: 800px; height: 800px;
-            background: linear-gradient(45deg, var(--brand-blue), var(--brand-red));
-            animation: drift 25s infinite alternate-reverse ease-in-out;
-        }
-
-        @keyframes drift {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(50px, 30px) rotate(5deg); }
-        }
-
-        /* Painted Stars Layer */
-        .star-layer {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
-            position: absolute;
-            fill: var(--brand-red);
-            opacity: 0.3;
-            animation: twinkle 6s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; transform: scale(1) rotate(0deg); }
-            50% { opacity: 0.5; transform: scale(1.1) rotate(10deg); }
-        }
+        .star-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .star { position: absolute; fill: var(--brand-red); opacity: 0.3; animation: twinkle 6s infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.1); } }
 
         /* Layout Grid */
         .grid-container {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            min-height: 100vh;
-            border-left: 1px solid var(--line);
-            border-right: 1px solid var(--line);
-            max-width: 1440px;
-            margin: 0 auto;
-            background: rgba(252, 250, 250, 0.7);
-            backdrop-filter: blur(12px);
-            position: relative;
+            display: grid; 
+            grid-template-columns: 80px 1fr; 
+            min-height: 100vh; 
+            border-left: 1px solid var(--line); 
+            border-right: 1px solid var(--line); 
+            max-width: 1440px; 
+            margin: 0 auto; 
+            background: rgba(252, 250, 250, 0.75); 
+            backdrop-filter: blur(12px); 
+            position: relative; 
             z-index: 2;
         }
 
-        .sidebar {
-            border-right: 1px solid var(--line);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-            position: relative;
-            z-index: 10;
-        }
+        .sidebar { border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .social-link { writing-mode: vertical-rl; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; margin: 15px 0; text-decoration: none; color: var(--text); opacity: 0.4; transition: 0.3s; }
 
-        .social-link {
-            writing-mode: vertical-rl;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 12px;
-            margin: 20px 0;
-            text-decoration: none;
-            color: var(--text);
-            opacity: 0.5;
-            transition: 0.3s;
-        }
-        .social-link:hover { opacity: 1; color: var(--brand-red); }
+        main { display: flex; flex-direction: column; width: 100%; }
 
-        main { display: flex; flex-direction: column; position: relative; z-index: 5; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; border-bottom: 1px solid var(--line); }
+        .logo { font-weight: 900; font-size: 24px; color: var(--brand-red); letter-spacing: 1px; }
+        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 50px;
-            border-bottom: 1px solid var(--line);
-        }
+        .hero { padding: 80px 40px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; border-bottom: 1px solid var(--line); }
+        .hero-text h1 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
+        .hero-text p { font-size: 1.1rem; opacity: 0.8; max-width: 450px; line-height: 1.6; margin-bottom: 30px; }
 
-        .logo { font-weight: 900; font-size: 26px; color: var(--brand-red); letter-spacing: 1px; }
-        .menu a { text-decoration: none; color: var(--text); margin-left: 40px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .menu a:hover { color: var(--brand-red); }
+        .btn-main { padding: 14px 35px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; }
 
-        .hero {
-            padding: 100px 50px;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: center;
-            border-bottom: 1px solid var(--line);
-            position: relative;
-        }
+        .orb-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; }
+        .orb { width: 320px; height: 320px; background: linear-gradient(45deg, var(--brand-red), var(--brand-pink)); border-radius: 50%; filter: blur(35px); opacity: 0.7; animation: float 7s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        .hero-text h1 { font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1.1; font-weight: 800; margin-bottom: 25px; letter-spacing: -2px;}
-        .hero-text p { font-size: 1.15rem; opacity: 0.8; max-width: 480px; line-height: 1.7; margin-bottom: 35px; }
-
-        .btn-main {
-            padding: 15px 40px;
-            background: var(--brand-red);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 20px -10px rgba(187, 31, 31, 0.5);
-            transition: 0.3s;
-        }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(187, 31, 31, 0.7); }
-
-        .orb-container { position: relative; display: flex; justify-content: center; align-items: center; }
-        .orb {
-            width: 350px; height: 350px;
-            background: linear-gradient(45deg, var(--brand-red), var(--brand-pink));
-            border-radius: 50%;
-            filter: blur(40px);
-            opacity: 0.7;
-            animation: float 7s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-        }
-
-        /* New style to ensure pixel art stays crisp */
         .pixel-art {
-            image-rendering: pixelated; /* Critical for pixel art */
-            image-rendering: -moz-crisp-edges;
-            image-rendering: crisp-edges;
+            image-rendering: pixelated; position: absolute; width: 160px; z-index: 10; transform: translateY(-15px); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid var(--line);
-            background: rgba(255,255,255,0.3);
-        }
-        .stat-box { padding: 50px; border-right: 1px solid var(--line); text-align: left; }
-        .stat-box:last-child { border-right: none; }
-        .stat-box h2 { font-size: 3rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 900; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
+        .stat-box { padding: 40px; border-right: 1px solid var(--line); }
+        .stat-box h2 { font-size: 2.8rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 900; }
 
-        .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
-        .founder-section h3 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px; color: var(--brand-red); opacity: 0.7; }
-        .founder-text { font-size: 2rem; max-width: 900px; line-height: 1.4; font-weight: 300; }
-        .highlight-title { font-weight: 800; color: var(--text); position: relative; display: inline-block; }
-        .highlight-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--brand-red); opacity: 0.3; }
+        .founder-section { padding: 80px 40px; border-bottom: 1px solid var(--line); }
+        .founder-text { font-size: 1.8rem; max-width: 800px; line-height: 1.4; font-weight: 300; }
+        .highlight-title { font-weight: 800; border-bottom: 3px solid rgba(187, 31, 31, 0.2); }
 
-        footer { padding: 80px 50px; background: var(--bg); }
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+        footer { padding: 60px 40px; background: var(--bg); }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 
-        @media (max-width: 900px) {
-            .grid-container { grid-template-columns: 1fr; border: none; }
+        /* --- THE MOBILE RESCUE --- */
+        @media (max-width: 768px) {
+            .grid-container { grid-template-columns: 1fr; border: none; width: 100%; }
             .sidebar { display: none; }
-            .hero { grid-template-columns: 1fr; text-align: center; padding: 60px 20px; }
-            .orb { width: 280px; height: 280px; margin: 0 auto; }
-            .stats { grid-template-columns: 1fr; }
-            .stat-box { border-right: none; border-bottom: 1px solid var(--line); }
-            .founder-text { font-size: 1.6rem; }
+            nav { padding: 20px; }
+            .menu { display: none; }
+            .hero { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; gap: 40px; width: 100%; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p { margin: 0 auto 30px auto; width: 100%; }
+            
+            .orb-container { width: 100%; overflow: hidden; }
+            .orb { width: 240px; height: 240px; }
+            .pixel-art { width: 120px; transform: translateY(-25px); }
+
+            .stats { grid-template-columns: 1fr; width: 100%; }
+            .stat-box { border-right: none; border-bottom: 1px solid var(--line); padding: 30px 20px; text-align: center; }
+            
+            .founder-section { padding: 40px 20px; text-align: center; }
+            .founder-text { font-size: 1.4rem; width: 100%; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .sub-box { flex-direction: column; }
+            input[type="email"] { width: 100%; margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -221,24 +125,21 @@
 
 <div class="grid-container">
     <div class="star-layer">
-        <svg class="star" style="top: 10%; right: 15%; width: 45px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-        <svg class="star" style="top: 45%; left: 5%; width: 35px; animation-delay: 2s;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-        <svg class="star" style="bottom: 15%; right: 8%; width: 60px; animation-delay: 1s;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+        <svg class="star" style="top: 10%; right: 10%; width: 40px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+        <svg class="star" style="top: 40%; left: 5%; width: 30px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
     </div>
 
     <aside class="sidebar">
         <a href="#" class="social-link">Instagram</a>
         <a href="#" class="social-link">LinkedIn</a>
-        <a href="#" class="social-link">GitHub</a>
     </aside>
 
     <main>
         <nav>
             <div class="logo">TECHBERRY</div>
             <div class="menu">
-                <a href="#courses">Courses</a>
-                <a href="#founder">Founder</a>
                 <a href="#about">About</a>
+                <a href="#founder">Founder</a>
             </div>
         </nav>
 
@@ -246,19 +147,15 @@
             <div class="hero-text">
                 <h1>Correct strategies <br>for your <br>future.</h1>
                 <p>We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.</p>
-                <br>
                 <a href="mailto:info@techberry.ge" class="btn-main">Get Started</a>
             </div>
             <div class="orb-container">
                 <div class="orb"></div>
-                <img src="strawberry-pixel-art-png.png" 
-                     alt="Techberry Pixel Strawberry" 
-                     class="pixel-art"
-                     style="position: absolute; width: 180px; z-index: 10; transform: translateY(-20px); filter: drop-shadow(0 15px 25px rgba(187, 31, 31, 0.25));">
+                <img src="strawberry-pixel-art-png.png" alt="Techberry Pixel Strawberry" class="pixel-art">
             </div>
         </section>
 
-        <section class="stats" id="courses">
+        <section class="stats">
             <div class="stat-box">
                 <h2>#1</h2>
                 <p>Python is the global language for AI & Automation.</p>
@@ -274,27 +171,26 @@
         </section>
 
         <section id="founder" class="founder-section">
-            <h3>The Goldmine Expertise</h3>
             <p class="founder-text">
                 Founded by a 25-year-old 
                 <span class="highlight-title">Lead Engineer & Head of Teaching Staff</span>. 
-                With degrees in <strong>ECE Engineering, Computer Engineering, and DevOps</strong>, 
-                Techberry Academy bridges the gap between basic coding and professional engineering.
+                With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, 
+                Techberry bridges the gap between basic coding and professional engineering.
             </p>
         </section>
 
         <footer>
             <div class="footer-grid">
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Contact</h4>
+                    <h4 style="margin-bottom: 15px;">Contact</h4>
                     <p>info@techberry.ge</p>
                     <p>Tbilisi, Georgia</p>
                 </div>
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Lab Notes</h4>
-                    <div style="display: flex;">
-                        <input type="email" placeholder="Email Address" style="padding: 15px; border: 1px solid var(--line); background: transparent; width: 100%; outline: none;">
-                        <button style="padding: 15px 30px; background: var(--brand-red); color: #fff; border: none; cursor: pointer; font-weight: 700;">Join</button>
+                    <h4 style="margin-bottom: 15px;">Lab Notes</h4>
+                    <div class="sub-box" style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="Email Address" style="padding: 12px; border: 1px solid var(--line); background: transparent; flex: 1;">
+                        <button style="padding: 12px 25px; background: var(--brand-red); color: #fff; border: none; font-weight: 700;">Join</button>
                     </div>
                 </div>
             </div>
