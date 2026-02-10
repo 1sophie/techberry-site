@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TECHBERRY | საინჟინრო აკადემია</title>
+    <title>TECHBERRY | Engineering Academy</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%238b0000%22 d=%22M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z%22/></svg>">
     
     <style>
-        /* --- CUSTOM FONT DECLARATION --- */
         @font-face {
             font-family: 'DumbanusX';
             src: url('dumbanusx.otf') format('opentype');
@@ -29,17 +28,19 @@
             --text: #1a1a1a;
             --font-header: 'Syncopate', sans-serif;
             --font-body: 'Inter', sans-serif;
-            /* Georgian specific font variable */
-            --font-georgian: 'DumbanusX', 'Inter', sans-serif;
+            --font-ge: 'DumbanusX', 'Inter', sans-serif;
         }
 
-        /* Applying the custom font to Georgian text specifically */
-        [lang="ka"], .lang-ka { font-family: var(--font-georgian); }
+        /* Use Inter for everything, but override for Georgian specifically */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: var(--font-body); }
+        
+        /* Language-specific font overrides */
+        .ka-txt { font-family: var(--font-ge); }
+        .en-brand { font-family: var(--font-body) !important; font-weight: 800; } /* Forces Python to look right */
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: var(--font-body); color: var(--text); scroll-behavior: smooth; }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); color: var(--text); scroll-behavior: smooth; }
 
-        /* --- BACKGROUND & STARS --- */
+        /* --- BACKGROUND --- */
         .background-islands { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
         .island { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; }
         .island-1 { top: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, var(--brand-pink), var(--brand-purple)); animation: drift 25s infinite alternate ease-in-out; }
@@ -50,13 +51,14 @@
         .star { position: absolute; fill: var(--brand-red); opacity: 0.4; animation: twinkle 6s infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
 
-        /* --- GRID & LAYOUT --- */
+        /* --- GRID STRUCTURE (Restored Socials Sidebar) --- */
         .grid-container {
             display: grid; grid-template-columns: 80px 1fr; min-height: 100vh; max-width: 1440px; margin: 0 auto; background: rgba(252, 250, 250, 0.55); backdrop-filter: blur(25px); position: relative; z-index: 2;
         }
 
-        .sidebar { border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .social-link { writing-mode: vertical-rl; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; margin: 15px 0; text-decoration: none; color: var(--text); opacity: 0.6; }
+        .sidebar { border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: center; align-items: center; position: sticky; top: 0; height: 100vh; }
+        .social-link { writing-mode: vertical-rl; text-transform: uppercase; letter-spacing: 2px; font-size: 11px; margin: 15px 0; text-decoration: none; color: var(--text); opacity: 0.6; transition: 0.3s; }
+        .social-link:hover { color: var(--brand-pink); opacity: 1; }
 
         main { display: flex; flex-direction: column; width: 100%; }
 
@@ -66,20 +68,16 @@
         .menu { display: flex; align-items: center; }
         .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-        .lang-switch {
-            background: var(--brand-pink); color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; margin-left: 30px; border-radius: 4px; transition: 0.3s; font-family: var(--font-header);
-        }
+        .lang-switch { background: var(--brand-pink); color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; margin-left: 30px; border-radius: 4px; font-family: var(--font-header); }
 
         .burger { display: none; cursor: pointer; background: none; border: none; padding: 10px; z-index: 1001; }
         .burger div { width: 22px; height: 2px; background-color: var(--brand-pink); margin: 6px 0; transition: all 0.3s ease; }
 
-        /* --- HERO --- */
         .hero { padding: 80px 40px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; border-bottom: 1px solid var(--line); }
-        .hero-text h1 { font-family: var(--font-header); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; }
+        .hero-text h1 { font-family: var(--font-header); font-size: clamp(2rem, 4.5vw, 4.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; }
         .hero-text p { font-size: 1.1rem; opacity: 0.9; max-width: 450px; line-height: 1.7; margin-bottom: 35px; }
         .btn-main { padding: 16px 40px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
 
-        /* --- ORB & PIXEL STRAWBERRY --- */
         .orb-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 400px; }
         .orb { width: 350px; height: 350px; background: radial-gradient(circle, var(--brand-pink), var(--brand-purple)); border-radius: 50%; filter: blur(50px); opacity: 0.8; animation: float 8s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
@@ -88,12 +86,10 @@
         .pixel-art-anim { width: 180px; image-rendering: pixelated; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)); animation: floatImg 7s ease-in-out infinite; }
         @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
 
-        /* --- STATS --- */
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
         .stat-box { padding: 50px; border-right: 1px solid var(--line); position: relative; }
         .stat-box h2 { font-family: var(--font-header); font-size: 2.5rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 700; }
 
-        /* --- FOUNDER --- */
         .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); }
         .founder-text { font-size: 1.8rem; max-width: 950px; line-height: 1.6; font-weight: 300; }
         .highlight-title { font-weight: 800; border-bottom: 3px solid rgba(166, 27, 46, 0.3); }
@@ -102,7 +98,7 @@
         .footer-logo { font-family: var(--font-header); color: var(--brand-pink); font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .sub-box { display: flex; gap: 10px; margin-top: 15px; }
-        .sub-box input { padding: 12px; border: 1px solid var(--line); background: transparent; flex: 1; font-family: inherit; }
+        .sub-box input { padding: 12px; border: 1px solid var(--line); background: transparent; flex: 1; }
         .sub-box button { padding: 12px 25px; background: var(--brand-red); color: #fff; border: none; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 11px; }
 
         @media (max-width: 768px) {
@@ -122,7 +118,7 @@
         }
     </style>
 </head>
-<body id="body-ka" class="lang-ka">
+<body id="main-body" class="ka-txt">
 
 <div class="background-islands">
     <div class="island island-1"></div>
@@ -130,11 +126,6 @@
 </div>
 
 <div class="grid-container">
-    <div class="star-layer">
-        <svg class="star" style="top: 12%; right: 12%; width: 45px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-        <svg class="star" style="top: 45%; left: 8%; width: 35px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
-    </div>
-
     <aside class="sidebar">
         <a href="#" class="social-link">Instagram</a>
         <a href="#" class="social-link">LinkedIn</a>
@@ -166,7 +157,7 @@
         </section>
 
         <section class="stats">
-            <div class="stat-box"><h2>#1</h2><p id="stat-1">Python არის გლობალური ენა AI და ავტომატიზაციისთვის.</p></div>
+            <div class="stat-box"><h2>#1</h2><p><span class="en-brand">Python</span> <span id="stat-1">არის გლობალური ენა AI და ავტომატიზაციისთვის.</span></p></div>
             <div class="stat-box"><h2>8.2M</h2><p id="stat-2">აქტიური Python დეველოპერი მსოფლიოში.</p></div>
             <div class="stat-box"><h2>100%</h2><p id="stat-3">პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.</p></div>
         </section>
@@ -174,8 +165,8 @@
         <section id="founder" class="founder-section">
             <p class="founder-text" id="founder-txt">
                 დაარსებულია 25 წლის <span class="highlight-title">წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. 
-                <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, 
-                Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.
+                <span class="en-brand">ECE</span>, კომპიუტერული ინჟინერიისა და <span class="en-brand">DevOps</span>-ის ხარისხით, 
+                <span class="en-brand">Techberry Academy</span> აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.
             </p>
         </section>
 
@@ -187,8 +178,8 @@
                     <p>Tbilisi, Georgia</p>
                 </div>
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-header); font-size: 14px;" id="foot-sub">გამოიწერე</h4>
-                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 5px;" id="foot-desc">შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.</p>
+                    <h4 id="foot-sub" style="text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-header); font-size: 14px;">გამოიწერე</h4>
+                    <p id="foot-desc" style="opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.</p>
                     <div class="sub-box">
                         <input type="email" placeholder="Email Address">
                         <button id="sub-btn">გაწევრიანდი</button>
@@ -205,20 +196,20 @@
             about: "შესახებ", founder: "დამფუძნებელი", btn: "EN",
             h1: "სწორი სტრატეგიები <br>შენი მომავლისთვის.",
             hp: "ჩვენ გთავაზობთ მსოფლიო დონის პროგრამირების სტრატეგიებს, უახლეს რობოტიკის აპლიკაციებს და პროფესიულ სერტიფიკატებს მომავალი თაობის ციფრული განვითარებისთვის.",
-            hbtn: "დაიწყე ახლა", s1: "Python არის გლობალური ენა AI და ავტომატიზაციისთვის.",
+            hbtn: "დაიწყე ახლა", s1: "არის გლობალური ენა AI და ავტომატიზაციისთვის.",
             s2: "აქტიური Python დეველოპერი მსოფლიოში.",
             s3: "პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.",
-            ft: "დაარსებულია 25 წლის <span class='highlight-title'>წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.",
+            ft: "დაარსებულია 25 წლის <span class='highlight-title'>წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. <span class='en-brand'>ECE</span>, კომპიუტერული ინჟინერიისა და <span class='en-brand'>DevOps</span>-ის ხარისხით, <span class='en-brand'>Techberry Academy</span> აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.",
             fsub: "გამოიწერე", fdesc: "შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.", fbtn: "გაწევრიანდი"
         },
         en: {
             about: "About", founder: "Founder", btn: "GE",
             h1: "Correct strategies <br>for your future.",
             hp: "We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.",
-            hbtn: "Get Started", s1: "Python is the global language for AI & Automation.",
+            hbtn: "Get Started", s1: "is the global language for AI & Automation.",
             s2: "Active Python developers worldwide.",
             s3: "Practical, project-based engineering pedagogy.",
-            ft: "Founded by a 25-year-old <span class='highlight-title'>Lead Engineer & Head of Teaching Staff</span>. With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, Techberry Academy bridges the gap between basic coding and professional engineering.",
+            ft: "Founded by a 25-year-old <span class='highlight-title'>Lead Engineer & Head of Teaching Staff</span>. With degrees in <span class='en-brand'>ECE</span>, Computer Engineering, and <span class='en-brand'>DevOps</span>, <span class='en-brand'>Techberry Academy</span> bridges the gap between basic coding and professional engineering.",
             fsub: "Subscribe", fdesc: "Join our community of young engineers.", fbtn: "Join"
         }
     };
@@ -228,7 +219,7 @@
     function toggleLang() {
         currentLang = currentLang === 'ka' ? 'en' : 'ka';
         const t = translations[currentLang];
-        document.body.className = currentLang === 'ka' ? 'lang-ka' : '';
+        document.getElementById('main-body').className = currentLang === 'ka' ? 'ka-ka' : 'en-en';
         document.getElementById('nav-about').innerText = t.about;
         document.getElementById('nav-founder').innerText = t.founder;
         document.getElementById('lang-btn').innerText = t.btn;
@@ -242,19 +233,15 @@
         document.getElementById('foot-sub').innerText = t.fsub;
         document.getElementById('foot-desc').innerText = t.fdesc;
         document.getElementById('sub-btn').innerText = t.fbtn;
+        
+        // Auto-close menu if open on mobile
+        document.getElementById('menu').classList.remove('active');
     }
 
-    // Burger Menu Logic
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
-    const menuLinks = menu.querySelectorAll('a');
-
     burger.addEventListener('click', () => { menu.classList.toggle('active'); });
-
-    // NEW: Auto-close menu when a link is clicked
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => { menu.classList.remove('active'); });
-    });
+    menu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menu.classList.remove('active'); }); });
 </script>
 
 </body>
