@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TECHBERRY | Engineering Academy</title>
+    <title>TECHBERRY | საინჟინრო აკადემია</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,11 +14,10 @@
     <style>
         :root {
             --bg: #fcfafa;
-            /* DARKER BRAND PALETTE */
-            --brand-red: #8b0000;      /* Darker Industrial Red */
-            --brand-pink: #a61b2e;     /* Deep Crimson (Darkened from your pink) */
-            --brand-purple: #4a148c;   /* Darker Purple */
-            --brand-blue: #0d47a1;     /* Deep Navy Blue */
+            --brand-red: #8b0000;
+            --brand-pink: #a61b2e;
+            --brand-purple: #4a148c;
+            --brand-blue: #0d47a1;
             --line: rgba(139, 0, 0, 0.15); 
             --text: #1a1a1a;
             --font-header: 'Syncopate', sans-serif;
@@ -26,11 +25,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: var(--font-body); color: var(--text); }
+        html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: var(--font-body); color: var(--text); scroll-behavior: smooth; }
 
-        /* --- DARKER BACKGROUND ISLANDS --- */
         .background-islands { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
-        .island { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; } /* Boosted Opacity */
+        .island { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; }
         .island-1 { top: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, var(--brand-pink), var(--brand-purple)); animation: drift 25s infinite alternate ease-in-out; }
         .island-2 { bottom: -10%; left: -10%; width: 70vw; height: 70vw; background: radial-gradient(circle, var(--brand-blue), var(--brand-red)); animation: drift 30s infinite alternate-reverse ease-in-out; }
         @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 20px); } }
@@ -49,17 +47,25 @@
         main { display: flex; flex-direction: column; width: 100%; }
 
         nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; border-bottom: 1px solid var(--line); position: relative; z-index: 100; }
-        .logo { 
-            font-family: var(--font-header); 
-            font-weight: 700; 
-            font-size: 22px; 
-            color: var(--brand-pink); /* Deeper Pink/Crimson */
-            letter-spacing: 1px; 
-            text-transform: uppercase;
-        }
+        .logo { font-family: var(--font-header); font-weight: 700; font-size: 22px; color: var(--brand-pink); letter-spacing: 1px; text-transform: uppercase; }
         
-        .menu { display: flex; }
+        .menu { display: flex; align-items: center; }
         .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* LANGUAGE TOGGLE BUTTON */
+        .lang-switch {
+            background: var(--brand-pink);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-left: 30px;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .lang-switch:hover { background: var(--brand-red); }
 
         .burger { display: none; cursor: pointer; background: none; border: none; padding: 10px; z-index: 1001; }
         .burger div { width: 22px; height: 2px; background-color: var(--brand-pink); margin: 6px 0; transition: all 0.3s ease; }
@@ -68,7 +74,6 @@
         .hero-text h1 { font-family: var(--font-header); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; }
         .hero-text p { font-size: 1.1rem; opacity: 0.9; max-width: 450px; line-height: 1.7; margin-bottom: 35px; }
         
-        /* DARKER BUTTON */
         .btn-main { padding: 16px 40px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; box-shadow: 0 10px 20px -5px rgba(139, 0, 0, 0.3); }
 
         .orb-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 400px; }
@@ -84,7 +89,7 @@
         .stat-box h2 { font-family: var(--font-header); font-size: 2.5rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 700; }
 
         .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); }
-        .founder-text { font-size: 2rem; max-width: 900px; line-height: 1.4; font-weight: 300; }
+        .founder-text { font-size: 1.8rem; max-width: 950px; line-height: 1.6; font-weight: 300; }
         .highlight-title { font-weight: 800; border-bottom: 3px solid rgba(166, 27, 46, 0.3); }
 
         footer { padding: 80px 40px; background: #fff; }
@@ -101,10 +106,9 @@
             .burger { display: block; }
             .menu { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg); flex-direction: column; justify-content: center; align-items: center; transition: 0.5s; z-index: 1000; }
             .menu.active { right: 0; }
-            .menu a { margin: 25px 0; font-size: 18px; font-family: var(--font-header); }
+            .menu a, .lang-switch { margin: 20px 0; font-size: 18px; font-family: var(--font-header); }
+            .lang-switch { font-size: 14px; padding: 10px 20px; }
             .hero { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; }
-            .pixel-wrapper { transform: translate(-50%, -50%) translateY(-30px); }
-            .pixel-art-anim { width: 140px; }
             .stats { grid-template-columns: 1fr; padding: 40px 0; }
             .stat-box { border-right: none; text-align: center; padding: 30px 20px; }
             .stat-box::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: var(--line); }
@@ -135,22 +139,19 @@
     <main>
         <nav>
             <div class="logo">TECHBERRY</div>
-            <button class="burger" id="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </button>
+            <button class="burger" id="burger"><div></div><div></div><div></div></button>
             <div class="menu" id="menu">
-                <a href="#about">About</a>
-                <a href="#founder">Founder</a>
+                <a href="#about" id="nav-about">შესახებ</a>
+                <a href="#founder" id="nav-founder">დამფუძნებელი</a>
+                <button class="lang-switch" id="lang-btn" onclick="toggleLang()">EN</button>
             </div>
         </nav>
 
         <section class="hero" id="about">
             <div class="hero-text">
-                <h1>Correct strategies <br>for your future.</h1>
-                <p>We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.</p>
-                <a href="mailto:info@techberry.ge" class="btn-main">Get Started</a>
+                <h1 id="hero-h1">სწორი სტრატეგიები <br>შენი მომავლისთვის.</h1>
+                <p id="hero-p">ჩვენ გთავაზობთ მსოფლიო დონის პროგრამირების სტრატეგიებს, უახლეს რობოტიკის აპლიკაციებს და პროფესიულ სერტიფიკატებს მომავალი თაობის ციფრული განვითარებისთვის.</p>
+                <a href="mailto:info@techberry.ge" class="btn-main" id="hero-btn">დაიწყე ახლა</a>
             </div>
             <div class="orb-container">
                 <div class="orb"></div>
@@ -161,17 +162,17 @@
         </section>
 
         <section class="stats">
-            <div class="stat-box"><h2>#1</h2><p>Python is the global language for AI & Automation.</p></div>
-            <div class="stat-box"><h2>8.2M</h2><p>Active Python developers worldwide.</p></div>
-            <div class="stat-box"><h2>100%</h2><p>Practical, project-based engineering pedagogy.</p></div>
+            <div class="stat-box"><h2>#1</h2><p id="stat-1">Python არის გლობალური ენა AI და ავტომატიზაციისთვის.</p></div>
+            <div class="stat-box"><h2>8.2M</h2><p id="stat-2">აქტიური Python დეველოპერი მსოფლიოში.</p></div>
+            <div class="stat-box"><h2>100%</h2><p id="stat-3">პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.</p></div>
         </section>
 
         <section id="founder" class="founder-section">
-            <p class="founder-text">
-                Founded by a 25-year-old
-                <span class="highlight-title">Lead Engineer & Head of Teaching Staff</span>. 
-                With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, 
-                Techberry Academy bridges the gap between basic coding and professional engineering.
+            <p class="founder-text" id="founder-txt">
+                დაარსებულია 25 წლის 
+                <span class="highlight-title">წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. 
+                <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, 
+                Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.
             </p>
         </section>
 
@@ -183,11 +184,11 @@
                     <p>Tbilisi, Georgia</p>
                 </div>
                 <div>
-                    <h4 style="text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-header); font-size: 14px;">Subscribe</h4>
-                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 5px;">Join our community of young engineers.</p>
+                    <h4 style="text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-header); font-size: 14px;" id="foot-sub">გამოიწერე</h4>
+                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 5px;" id="foot-desc">შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.</p>
                     <div class="sub-box">
                         <input type="email" placeholder="Email Address">
-                        <button>Join</button>
+                        <button id="sub-btn">გაწევრიანდი</button>
                     </div>
                 </div>
             </div>
@@ -196,23 +197,66 @@
 </div>
 
 <script>
+    // Language Data
+    const translations = {
+        ka: {
+            about: "შესახებ",
+            founder: "დამფუძნებელი",
+            btn: "EN",
+            h1: "სწორი სტრატეგიები <br>შენი მომავლისთვის.",
+            hp: "ჩვენ გთავაზობთ მსოფლიო დონის პროგრამირების სტრატეგიებს, უახლეს რობოტიკის აპლიკაციებს და პროფესიულ სერტიფიკატებს მომავალი თაობის ციფრული განვითარებისთვის.",
+            hbtn: "დაიწყე ახლა",
+            s1: "Python არის გლობალური ენა AI და ავტომატიზაციისთვის.",
+            s2: "აქტიური Python დეველოპერი მსოფლიოში.",
+            s3: "პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.",
+            ft: "დაარსებულია 25 წლის <span class='highlight-title'>წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.",
+            fsub: "გამოიწერე",
+            fdesc: "შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.",
+            fbtn: "გაწევრიანდი"
+        },
+        en: {
+            about: "About",
+            founder: "Founder",
+            btn: "GE",
+            h1: "Correct strategies <br>for your future.",
+            hp: "We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.",
+            hbtn: "Get Started",
+            s1: "Python is the global language for AI & Automation.",
+            s2: "Active Python developers worldwide.",
+            s3: "Practical, project-based engineering pedagogy.",
+            ft: "Founded by a 25-year-old <span class='highlight-title'>Lead Engineer & Head of Teaching Staff</span>. With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, Techberry Academy bridges the gap between basic coding and professional engineering.",
+            fsub: "Subscribe",
+            fdesc: "Join our community of young engineers.",
+            fbtn: "Join"
+        }
+    };
+
+    let currentLang = 'ka';
+
+    function toggleLang() {
+        currentLang = currentLang === 'ka' ? 'en' : 'ka';
+        const t = translations[currentLang];
+        
+        document.getElementById('nav-about').innerText = t.about;
+        document.getElementById('nav-founder').innerText = t.founder;
+        document.getElementById('lang-btn').innerText = t.btn;
+        document.getElementById('hero-h1').innerHTML = t.h1;
+        document.getElementById('hero-p').innerText = t.hp;
+        document.getElementById('hero-btn').innerText = t.hbtn;
+        document.getElementById('stat-1').innerText = t.s1;
+        document.getElementById('stat-2').innerText = t.s2;
+        document.getElementById('stat-3').innerText = t.s3;
+        document.getElementById('founder-txt').innerHTML = t.ft;
+        document.getElementById('foot-sub').innerText = t.fsub;
+        document.getElementById('foot-desc').innerText = t.fdesc;
+        document.getElementById('sub-btn').innerText = t.fbtn;
+    }
+
+    // Burger Menu Logic
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
-    const l1 = document.querySelector('.line1');
-    const l2 = document.querySelector('.line2');
-    const l3 = document.querySelector('.line3');
-
     burger.addEventListener('click', () => {
         menu.classList.toggle('active');
-        if(menu.classList.contains('active')) {
-            l1.style.transform = 'translateY(8px) rotate(45deg)';
-            l2.style.opacity = '0';
-            l3.style.transform = 'translateY(-8px) rotate(-45deg)';
-        } else {
-            l1.style.transform = 'none';
-            l2.style.opacity = '1';
-            l3.style.transform = 'none';
-        }
     });
 </script>
 
