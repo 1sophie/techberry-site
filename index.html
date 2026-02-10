@@ -12,6 +12,13 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%238b0000%22 d=%22M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z%22/></svg>">
     
     <style>
+        /* --- CUSTOM FONT DECLARATION --- */
+        @font-face {
+            font-family: 'DumbanusX';
+            src: url('dumbanusx.otf') format('opentype');
+            font-display: swap;
+        }
+
         :root {
             --bg: #fcfafa;
             --brand-red: #8b0000;
@@ -22,11 +29,17 @@
             --text: #1a1a1a;
             --font-header: 'Syncopate', sans-serif;
             --font-body: 'Inter', sans-serif;
+            /* Georgian specific font variable */
+            --font-georgian: 'DumbanusX', 'Inter', sans-serif;
         }
+
+        /* Applying the custom font to Georgian text specifically */
+        [lang="ka"], .lang-ka { font-family: var(--font-georgian); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html, body { width: 100%; overflow-x: hidden; background-color: var(--bg); font-family: var(--font-body); color: var(--text); scroll-behavior: smooth; }
 
+        /* --- BACKGROUND & STARS --- */
         .background-islands { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
         .island { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5; }
         .island-1 { top: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, var(--brand-pink), var(--brand-purple)); animation: drift 25s infinite alternate ease-in-out; }
@@ -37,6 +50,7 @@
         .star { position: absolute; fill: var(--brand-red); opacity: 0.4; animation: twinkle 6s infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
 
+        /* --- GRID & LAYOUT --- */
         .grid-container {
             display: grid; grid-template-columns: 80px 1fr; min-height: 100vh; max-width: 1440px; margin: 0 auto; background: rgba(252, 250, 250, 0.55); backdrop-filter: blur(25px); position: relative; z-index: 2;
         }
@@ -52,30 +66,20 @@
         .menu { display: flex; align-items: center; }
         .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* LANGUAGE TOGGLE BUTTON */
         .lang-switch {
-            background: var(--brand-pink);
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 10px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-left: 30px;
-            border-radius: 4px;
-            transition: 0.3s;
+            background: var(--brand-pink); color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; margin-left: 30px; border-radius: 4px; transition: 0.3s; font-family: var(--font-header);
         }
-        .lang-switch:hover { background: var(--brand-red); }
 
         .burger { display: none; cursor: pointer; background: none; border: none; padding: 10px; z-index: 1001; }
         .burger div { width: 22px; height: 2px; background-color: var(--brand-pink); margin: 6px 0; transition: all 0.3s ease; }
 
+        /* --- HERO --- */
         .hero { padding: 80px 40px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center; border-bottom: 1px solid var(--line); }
         .hero-text h1 { font-family: var(--font-header); font-size: clamp(2.2rem, 4.5vw, 4.5rem); line-height: 1.2; font-weight: 700; margin-bottom: 25px; text-transform: uppercase; }
         .hero-text p { font-size: 1.1rem; opacity: 0.9; max-width: 450px; line-height: 1.7; margin-bottom: 35px; }
-        
-        .btn-main { padding: 16px 40px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; box-shadow: 0 10px 20px -5px rgba(139, 0, 0, 0.3); }
+        .btn-main { padding: 16px 40px; background: var(--brand-red); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; display: inline-block; transition: 0.3s; letter-spacing: 1px; text-transform: uppercase; font-size: 12px; }
 
+        /* --- ORB & PIXEL STRAWBERRY --- */
         .orb-container { position: relative; display: flex; justify-content: center; align-items: center; width: 100%; min-height: 400px; }
         .orb { width: 350px; height: 350px; background: radial-gradient(circle, var(--brand-pink), var(--brand-purple)); border-radius: 50%; filter: blur(50px); opacity: 0.8; animation: float 8s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
@@ -84,10 +88,12 @@
         .pixel-art-anim { width: 180px; image-rendering: pixelated; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)); animation: floatImg 7s ease-in-out infinite; }
         @keyframes floatImg { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
 
+        /* --- STATS --- */
         .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
         .stat-box { padding: 50px; border-right: 1px solid var(--line); position: relative; }
         .stat-box h2 { font-family: var(--font-header); font-size: 2.5rem; color: var(--brand-red); margin-bottom: 10px; font-weight: 700; }
 
+        /* --- FOUNDER --- */
         .founder-section { padding: 100px 50px; border-bottom: 1px solid var(--line); }
         .founder-text { font-size: 1.8rem; max-width: 950px; line-height: 1.6; font-weight: 300; }
         .highlight-title { font-weight: 800; border-bottom: 3px solid rgba(166, 27, 46, 0.3); }
@@ -107,18 +113,16 @@
             .menu { position: fixed; top: 0; right: -100%; width: 85%; height: 100vh; background: var(--bg); flex-direction: column; justify-content: center; align-items: center; transition: 0.5s; z-index: 1000; }
             .menu.active { right: 0; }
             .menu a, .lang-switch { margin: 20px 0; font-size: 18px; font-family: var(--font-header); }
-            .lang-switch { font-size: 14px; padding: 10px 20px; }
             .hero { grid-template-columns: 1fr; padding: 40px 20px; text-align: center; }
             .stats { grid-template-columns: 1fr; padding: 40px 0; }
             .stat-box { border-right: none; text-align: center; padding: 30px 20px; }
             .stat-box::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: var(--line); }
             .stat-box:last-child::after { display: none; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .sub-box { flex-direction: column; }
         }
     </style>
 </head>
-<body>
+<body id="body-ka" class="lang-ka">
 
 <div class="background-islands">
     <div class="island island-1"></div>
@@ -169,8 +173,7 @@
 
         <section id="founder" class="founder-section">
             <p class="founder-text" id="founder-txt">
-                დაარსებულია 25 წლის 
-                <span class="highlight-title">წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. 
+                დაარსებულია 25 წლის <span class="highlight-title">წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. 
                 <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, 
                 Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.
             </p>
@@ -197,37 +200,26 @@
 </div>
 
 <script>
-    // Language Data
     const translations = {
         ka: {
-            about: "შესახებ",
-            founder: "დამფუძნებელი",
-            btn: "EN",
+            about: "შესახებ", founder: "დამფუძნებელი", btn: "EN",
             h1: "სწორი სტრატეგიები <br>შენი მომავლისთვის.",
             hp: "ჩვენ გთავაზობთ მსოფლიო დონის პროგრამირების სტრატეგიებს, უახლეს რობოტიკის აპლიკაციებს და პროფესიულ სერტიფიკატებს მომავალი თაობის ციფრული განვითარებისთვის.",
-            hbtn: "დაიწყე ახლა",
-            s1: "Python არის გლობალური ენა AI და ავტომატიზაციისთვის.",
+            hbtn: "დაიწყე ახლა", s1: "Python არის გლობალური ენა AI და ავტომატიზაციისთვის.",
             s2: "აქტიური Python დეველოპერი მსოფლიოში.",
             s3: "პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.",
             ft: "დაარსებულია 25 წლის <span class='highlight-title'>წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. <strong>ECE, კომპიუტერული ინჟინერიისა და DevOps-ის</strong> ხარისხით, Techberry Academy აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.",
-            fsub: "გამოიწერე",
-            fdesc: "შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.",
-            fbtn: "გაწევრიანდი"
+            fsub: "გამოიწერე", fdesc: "შემოუერთდი ახალგაზრდა ინჟინრების საზოგადოებას.", fbtn: "გაწევრიანდი"
         },
         en: {
-            about: "About",
-            founder: "Founder",
-            btn: "GE",
+            about: "About", founder: "Founder", btn: "GE",
             h1: "Correct strategies <br>for your future.",
             hp: "We provide world-class programming strategies, cutting-edge robotics applications, and professional certifications to help the next generation explode digitally.",
-            hbtn: "Get Started",
-            s1: "Python is the global language for AI & Automation.",
+            hbtn: "Get Started", s1: "Python is the global language for AI & Automation.",
             s2: "Active Python developers worldwide.",
             s3: "Practical, project-based engineering pedagogy.",
             ft: "Founded by a 25-year-old <span class='highlight-title'>Lead Engineer & Head of Teaching Staff</span>. With degrees in <strong>ECE, Computer Engineering, and DevOps</strong>, Techberry Academy bridges the gap between basic coding and professional engineering.",
-            fsub: "Subscribe",
-            fdesc: "Join our community of young engineers.",
-            fbtn: "Join"
+            fsub: "Subscribe", fdesc: "Join our community of young engineers.", fbtn: "Join"
         }
     };
 
@@ -236,7 +228,7 @@
     function toggleLang() {
         currentLang = currentLang === 'ka' ? 'en' : 'ka';
         const t = translations[currentLang];
-        
+        document.body.className = currentLang === 'ka' ? 'lang-ka' : '';
         document.getElementById('nav-about').innerText = t.about;
         document.getElementById('nav-founder').innerText = t.founder;
         document.getElementById('lang-btn').innerText = t.btn;
@@ -255,8 +247,13 @@
     // Burger Menu Logic
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
-    burger.addEventListener('click', () => {
-        menu.classList.toggle('active');
+    const menuLinks = menu.querySelectorAll('a');
+
+    burger.addEventListener('click', () => { menu.classList.toggle('active'); });
+
+    // NEW: Auto-close menu when a link is clicked
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => { menu.classList.remove('active'); });
     });
 </script>
 
