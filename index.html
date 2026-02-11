@@ -29,12 +29,10 @@
             --text: #1a1a1a;
             --font-header: 'Syncopate', sans-serif;
             --font-body: 'Inter', sans-serif;
-            --font-ge: 'DumbanusX', 'Inter', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: var(--font-body); }
         
-        /* Language-specific font overrides */
         .ka-ka .ka-txt { font-family: var(--font-ge); }
         .en-brand { font-family: var(--font-body) !important; font-weight: 800; letter-spacing: 0; text-transform: none; display: inline-block; }
 
@@ -47,9 +45,13 @@
         .island-2 { bottom: -10%; left: -10%; width: 70vw; height: 70vw; background: radial-gradient(circle, var(--brand-blue), var(--brand-red)); animation: drift 30s infinite alternate-reverse ease-in-out; }
         @keyframes drift { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 20px); } }
 
+        /* --- ADDED TWINKLING STARS CSS --- */
         .star-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .star { position: absolute; fill: var(--brand-red); opacity: 0.4; animation: twinkle 6s infinite ease-in-out; }
-        @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.1); } }
+        .star { position: absolute; fill: var(--brand-red); opacity: 0.3; animation: twinkle 6s infinite ease-in-out; }
+        @keyframes twinkle { 
+            0%, 100% { opacity: 0.2; transform: scale(1) rotate(0deg); } 
+            50% { opacity: 0.5; transform: scale(1.1) rotate(10deg); } 
+        }
 
         /* --- GRID STRUCTURE --- */
         .grid-container {
@@ -66,7 +68,7 @@
         .logo { font-family: var(--font-header); font-weight: 700; font-size: 20px; color: var(--brand-pink); letter-spacing: 1px; text-transform: uppercase; }
         
         .menu { display: flex; align-items: center; }
-        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .menu a { text-decoration: none; color: var(--text); margin-left: 30px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
         .lang-switch { background: var(--brand-pink); color: white; border: none; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; margin-left: 30px; border-radius: 4px; font-family: var(--font-header); }
 
@@ -126,9 +128,15 @@
 </div>
 
 <div class="grid-container">
+    <div class="star-layer">
+        <svg class="star" style="top: 10%; right: 10%; width: 40px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+        <svg class="star" style="top: 40%; left: 5%; width: 30px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+        <svg class="star" style="top: 80%; right: 15%; width: 25px;" viewBox="0 0 100 100"><path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z"/></svg>
+    </div>
+
     <aside class="sidebar">
-        <a href="https://www.instagram.com/techberry_academy" target="_blank" class="social-link">Instagram</a>
-        <a href="https://www.linkedin.com/in/nika-nadareishvili" target="_blank" class="social-link">LinkedIn</a>
+        <a href="" target="_blank" class="social-link">Instagram</a>
+        <a href="" target="_blank" class="social-link">LinkedIn</a>
     </aside>
 
     <main>
@@ -158,12 +166,12 @@
 
         <section class="stats">
             <div class="stat-box"><h2>#1</h2><p><span class="en-brand">Python</span> <span id="stat-1" class="ka-txt">არის გლობალური ენა AI და ავტომატიზაციისთვის.</span></p></div>
-            <div class="stat-box"><h2>8.2M</h2><p id="stat-2" class="ka-txt">აქტიური Python დეველოპერი მსოფლიოში.</p></div>
+            <div class="stat-box"><h2>8.2M</h2><p id="stat-2" class="ka-txt">აქტიური <span class="en-brand">Python</span> დეველოპერი მსოფლიოში.</p></div>
             <div class="stat-box"><h2>100%</h2><p id="stat-3" class="ka-txt">პრაქტიკული, პროექტებზე დაფუძნებული საინჟინრო პედაგოგიკა.</p></div>
         </section>
 
         <section id="founder" class="founder-section">
-            <p class="founder-text ka-txt" id="founder-txt">
+            <p class="founder-text ka-txt", class="ka-txt", id="founder-txt">
                 დაარსებულია 25 წლის <span class="highlight-title">წამყვანი ინჟინრისა და სასწავლო პროგრამების ხელმძღვანელის</span> მიერ. 
                 <span class="en-brand">ECE</span>, კომპიუტერული ინჟინერიისა და <span class="en-brand">DevOps</span>-ის ხარისხით, 
                 <span class="en-brand">Techberry Academy</span> აკავშირებს საბაზისო კოდირებას და პროფესიონალურ ინჟინერიას.
